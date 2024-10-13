@@ -69,12 +69,17 @@ class AudioController extends AbstractController
 
         // Формируем команду для вызова Whisper с нужными параметрами
         $command = escapeshellcmd("whisper " . escapeshellarg($filePath) . " --model small --output_dir " . escapeshellarg($outputDir));
+//        var_dump($command);
+//        die();
 //
 //        // Выполняем команду
         exec($command, $output, $return_var);
 //
         if ($return_var !== 0) {
             // Возвращаем сообщение об ошибке, если команда не выполнилась успешно
+            var_dump($output);
+            var_dump($return_var);
+            die();
             return "Ошибка выполнения команды: ".implode("\n", $output);
         }
 
