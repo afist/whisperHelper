@@ -49,8 +49,7 @@ class AudioController extends AbstractController
                 return new JsonResponse(
                     ['status' => 'success', 'transcript' => $transcript],
                     Response::HTTP_OK,
-                    ['Content-Type' => 'application/json;charset=UTF-8'],
-                    true
+                    ['Content-Type' => 'application/json;charset=UTF-8']
                 );
             } catch (FileException $e) {
                 return new JsonResponse(['status' => 'error', 'message' => $e->getMessage()], 500);
