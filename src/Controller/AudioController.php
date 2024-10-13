@@ -77,7 +77,6 @@ class AudioController extends AbstractController
 //
         if ($return_var !== 0) {
             // Возвращаем сообщение об ошибке, если команда не выполнилась успешно
-            var_dump($command);
             var_dump($output);
             var_dump($return_var);
             die();
