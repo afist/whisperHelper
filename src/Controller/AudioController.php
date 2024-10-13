@@ -62,19 +62,20 @@ class AudioController extends AbstractController
 
     private function processWithWhisper(string $filePath): string
     {
+        $filePath = "/var/www/html/public/uploads/123/670b7b390b86a9.08837467.ogg";
         // Получаем директорию, где будет сохранен транскрипт
         $outputDir = dirname($filePath);
 
         // Формируем команду для вызова Whisper с нужными параметрами
-        $command = escapeshellcmd("whisper ".escapeshellarg($filePath)." --model small");
-
-        // Выполняем команду
-        exec($command, $output, $return_var);
-
-        if ($return_var !== 0) {
-            // Возвращаем сообщение об ошибке, если команда не выполнилась успешно
-            return "Ошибка выполнения команды: ".implode("\n", $output);
-        }
+//        $command = escapeshellcmd("whisper ".escapeshellarg($filePath)." --model small");
+//
+//        // Выполняем команду
+//        exec($command, $output, $return_var);
+//
+//        if ($return_var !== 0) {
+//            // Возвращаем сообщение об ошибке, если команда не выполнилась успешно
+//            return "Ошибка выполнения команды: ".implode("\n", $output);
+//        }
 
         // Определяем путь к файлу транскрипта
         $transcriptFile = $outputDir.'/'.pathinfo($filePath, PATHINFO_FILENAME).'.txt';
