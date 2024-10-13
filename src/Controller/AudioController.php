@@ -31,11 +31,11 @@ class AudioController extends AbstractController
             $uploadDir = $this->getParameter('kernel.project_dir').'/public/uploads/'.$uniqueFolder;
 
             // Создаем папку для каждого загруженного файла
-            if (!mkdir($uploadDir, 0777, true) && !is_dir($uploadDir)) {
+//            if (!mkdir($uploadDir, 0777, true) && !is_dir($uploadDir)) {
 //                return new JsonResponse(
 //                    ['status' => 'error', 'message' => 'Не удалось создать директорию для загрузки'], 500
 //                );
-            }
+//            }
 
             // Генерация уникального имени файла
             $newFilename = uniqid('', true).'.'.$uploadedFile->guessExtension();
