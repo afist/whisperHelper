@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Audio</title>
+</head>
+<body>
+<h1>Upload an Audio File</h1>
+
+<form id="audio-upload-form" enctype="multipart/form-data">
+    <label for="file">Choose an audio file:</label>
+    <input type="file" name="audio_file" id="file" accept="audio/*" required>
+    <button type="submit">Upload</button>
+</form>
+
+<p id="status"></p>
+
+<script>
+    document.getElementById('audio-upload-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch('{{ path('app_upload_file') }}', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => response.text())
+            .then(result => {
+                document.getElementById('status').textContent = 'File uploaded successfully: ' + result;
+            })
+            .catch(error => {
+                document.getElementById('status').textContent = 'Error uploading file: ' + error;
+            });
+    });
+</script>
+</body>
+</html>
