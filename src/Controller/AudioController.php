@@ -26,16 +26,16 @@ class AudioController extends AbstractController
 
         if ($uploadedFile) {
             // Генерация уникального имени для директории, в которую будет загружен файл
-            $uniqueFolder = uniqid('upload_', true);
-//            $uniqueFolder = 123;
+//            $uniqueFolder = uniqid('upload_', true);
+            $uniqueFolder = 123;
             $uploadDir = $this->getParameter('kernel.project_dir').'/public/uploads/'.$uniqueFolder;
 
             // Создаем папку для каждого загруженного файла
-            if (!mkdir($uploadDir, 0777, true) && !is_dir($uploadDir)) {
-                return new JsonResponse(
-                    ['status' => 'error', 'message' => 'Не удалось создать директорию для загрузки'], 500
-                );
-            }
+//            if (!mkdir($uploadDir, 0777, true) && !is_dir($uploadDir)) {
+//                return new JsonResponse(
+//                    ['status' => 'error', 'message' => 'Не удалось создать директорию для загрузки'], 500
+//                );
+//            }
 
             // Генерация уникального имени файла
             $newFilename = uniqid('', true).'.'.$uploadedFile->guessExtension();
@@ -63,24 +63,24 @@ class AudioController extends AbstractController
 
     private function processWithWhisper(string $filePath): string
     {
-//        $filePath = "/var/www/html/public/uploads/123/670b7d94db7299.75537766.ogg";
+        $filePath = "/var/www/html/public/uploads/123/670b7d94db7299.75537766.ogg";
         // Получаем директорию, где будет сохранен транскрипт
         $outputDir = dirname($filePath);
 
         // Формируем команду для вызова Whisper с нужными параметрами
-        $command = escapeshellcmd("whisper " . escapeshellarg($filePath) . " --model small --output_dir " . escapeshellarg($outputDir));
+//        $command = escapeshellcmd("whisper " . escapeshellarg($filePath) . " --model small --output_dir " . escapeshellarg($outputDir));
 //
 //        // Выполняем команду
-        exec($command, $output, $return_var);
+//        exec($command, $output, $return_var);
 //
-        if ($return_var !== 0) {
-            // Возвращаем сообщение об ошибке, если команда не выполнилась успешно
-            return "Ошибка выполнения команды: ".implode("\n", $output);
-        }
+//        if ($return_var !== 0) {
+//            // Возвращаем сообщение об ошибке, если команда не выполнилась успешно
+//            return "Ошибка выполнения команды: ".implode("\n", $output);
+//        }
 
         // Определяем путь к файлу транскрипта
-        $transcriptFile = $outputDir.'/'.pathinfo($filePath, PATHINFO_FILENAME).'.txt';
-//        $transcriptFile = "/var/www/html/public/uploads/123/670b7d94db7299.75537766.txt";
+//        $transcriptFile = $outputDir.'/'.pathinfo($filePath, PATHINFO_FILENAME).'.txt';
+        $transcriptFile = "/var/www/html/public/uploads/123/670b7d94db7299.75537766.txt";
 
         // Проверяем, существует ли файл транскрипции, и возвращаем его содержимое
         if (file_exists($transcriptFile)) {
