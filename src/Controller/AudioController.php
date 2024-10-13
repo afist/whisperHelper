@@ -45,8 +45,7 @@ class AudioController extends AbstractController
                 $uploadedFile->move($uploadDir, $newFilename);
 
                 // Запуск процесса транскрипции с Whisper
-                $transcript = $this->processWithWhisper($uploadDir.'/'.$newFilename);
-
+                $transcript = mb_convert_encoding($this->processWithWhisper($uploadDir.'/'.$newFilename), 'UTF-8', 'auto');
                 return new JsonResponse(
                     ['status' => 'success', 'transcript' => $transcript],
                     Response::HTTP_OK,
